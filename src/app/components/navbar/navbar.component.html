@@ -1,0 +1,54 @@
+<nav class="navbar navbar-expand-lg navColor">
+  <div class="container">
+    <a href="" class="navbar-brand text-white">
+      BookSearchApp
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <i class="fas fa-bars text-white"></i>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">
+            <img src="../../../assets/books.png" alt="Books" class="Img" />
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
+      </ul>
+      <form
+        #searchForm="ngForm"
+        (ngSubmit)="search()"
+        class="form-inline my-2 my-lg-0"
+      >
+        <input
+          type="text"
+          name="searchTerm"
+          class="form-control mr-sm-2"
+          [(ngModel)]="book.searchTerm"
+          placeholder="Search Books..."
+          #searchTerm="ngModel"
+        />
+        <span
+          *ngIf="searchTerm.invalid && (searchTerm.dirty || searchTerm.touched)"
+          class="text-danger"
+        >
+          <h6 *ngIf="searchTerm.errors">
+            Please enter a book title to begin.
+          </h6>
+        </span>
+        <button type="submit" class="btn my-2 my-sm-0 btn-outline-secondary">
+          Search
+        </button>
+      </form>
+    </div>
+  </div>
+</nav>

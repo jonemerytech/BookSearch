@@ -1,0 +1,29 @@
+<!-- <div class="wrapper" *ngIf="books.length == 0">
+  <div class="container full-width-height">
+    <div class="card bg-secondary">
+      <div class="card-header">Search millions of books</div>
+      <div class="card-body">
+        <form #searchForm="ngForm" (ngSubmit)="search()">
+          <input type="text" name="searchTerm" class="form-control-lg" [(ngModel)]="book.searchTerm"
+            #searchTerm="ngModel">
+          <span *ngIf="searchTerm.invalid && (searchTerm.dirty || searchTerm.touched)" class="text-danger">
+            <h6 *ngIf="searchTerm.errors">
+              Please enter a book title to begin.
+            </h6>
+          </span>
+          <button type="submit" class="btn btn-outline-dark ml-1 mb-2">Search</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<div class="grid mt-5">
+  <div class="gridItems" *ngFor="let book of books">
+    <img src="{{ book['volumeInfo'].imageLinks.thumbnail }}" alt="Books" />
+    <p class="link" [routerLink]="['/book/', book.id]">
+      {{ book['volumeInfo'].title }}
+    </p>
+    <p>By: {{ book['volumeInfo'].authors[0] }}</p>
+  </div>
+</div>
