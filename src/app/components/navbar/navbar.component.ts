@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { BookService } from '../../services/book.service';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-navbar',
@@ -7,20 +6,17 @@ import { BookService } from '../../services/book.service';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
+  @Output() searchBooks: EventEmitter<any> = new EventEmitter();
+
   book = {
     searchTerm: ''
   };
 
-  books = [];
-
-  constructor(private bookService: BookService) {}
+  constructor() {}
 
   ngOnInit() {}
 
   search() {
-    this.bookService.searchBook().subscribe(res => {
-      // tslint:disable-next-line: no-string-literal
-      this.books = res['items']['volumeInfo'];
-    });
+    this.searchBooks.emit(this.book.searchTerm);
   }
 }

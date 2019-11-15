@@ -2,6 +2,17 @@ hr {
   border-color: #fff;
 }
 
+img {
+  position: relative;
+}
+
+i.fa {
+  position: absolute;
+  bottom: 0;
+  right: 24%;
+  color: black !important;
+}
+
 .wrap {
   display: flex;
   justify-content: center;

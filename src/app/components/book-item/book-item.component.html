@@ -1,0 +1,18 @@
+<div class="gridItems">
+  <img
+    src="{{ book['volumeInfo'].imageLinks.thumbnail }}"
+    alt="Books"
+    *ngIf="book['volumeInfo'].imageLinks"
+  />
+  <img
+    src="http://placehold.jp/3b945e/ffffff/191x272.png?text=No%20Poster%20Found"
+    alt="Books"
+    *ngIf="!book['volumeInfo'].imageLinks"
+  />
+  <p class="link" (click)="send(book.id)">
+    {{ book['volumeInfo'].title }}
+  </p>
+  <p *ngIf="book['volumeInfo'].authors">
+    By: {{ book['volumeInfo'].authors[0] }}
+  </p>
+</div>

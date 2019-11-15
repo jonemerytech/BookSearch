@@ -1,29 +1,24 @@
-<!-- <div class="wrapper" *ngIf="books.length == 0">
-  <div class="container full-width-height">
-    <div class="card bg-secondary">
-      <div class="card-header">Search millions of books</div>
-      <div class="card-body">
-        <form #searchForm="ngForm" (ngSubmit)="search()">
-          <input type="text" name="searchTerm" class="form-control-lg" [(ngModel)]="book.searchTerm"
-            #searchTerm="ngModel">
-          <span *ngIf="searchTerm.invalid && (searchTerm.dirty || searchTerm.touched)" class="text-danger">
-            <h6 *ngIf="searchTerm.errors">
-              Please enter a book title to begin.
-            </h6>
-          </span>
-          <button type="submit" class="btn btn-outline-dark ml-1 mb-2">Search</button>
-        </form>
-      </div>
-    </div>
-  </div>
-</div> -->
-
-<div class="grid mt-5">
-  <div class="gridItems" *ngFor="let book of books">
-    <img src="{{ book['volumeInfo'].imageLinks.thumbnail }}" alt="Books" />
-    <p class="link" [routerLink]="['/book/', book.id]">
-      {{ book['volumeInfo'].title }}
-    </p>
-    <p>By: {{ book['volumeInfo'].authors[0] }}</p>
-  </div>
+<ng4-loading-spinner> </ng4-loading-spinner>
+<app-navbar (searchBooks)="searchBooks($event)"></app-navbar>
+<div class="container grid mt-5">
+  <ng-container *ngIf="bookId.id == 0">
+    <app-book-item
+      *ngFor="
+        let book of books
+          | paginate
+            : { itemsPerPage: 20, currentPage: p, totalItems: totalItems }
+      "
+      [book]="book"
+      (sendId)="getBookById($event)"
+    ></app-book-item>
+  </ng-container>
 </div>
+<div class="container d-flex justify-content-center">
+  <pagination-controls
+    *ngIf="bookId.id == 0"
+    class="my-pagination"
+    (pageChange)="pageChange($event)"
+  ></pagination-controls>
+</div>
+
+<app-book *ngIf="bookId.id !== 0" [bookId]="bookId"></app-book>
