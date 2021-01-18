@@ -24,8 +24,9 @@ export class BooksComponent implements OnInit {
     retailPrice: 0
   };
 
-  p = 0;
+  p = 40;
   totalItems: number;
+  showPagination: boolean;
 
   books: Book[];
 
@@ -35,12 +36,14 @@ export class BooksComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.showPagination = false;
     this.spinnerService.show();
     this.bookService.getBooks(this.p).subscribe(res => {
       this.totalItems = res['totalItems'];
       this.books = res['items'];
-
+      console.log(this.books);
       this.spinnerService.hide();
+      this.showPagination = true;
     });
   }
 
@@ -54,22 +57,23 @@ export class BooksComponent implements OnInit {
   }
 
   getBookById(id) {
+    this.showPagination = false;
     this.spinnerService.show();
     this.bookService.getBookById(id).subscribe(res => {
       this.bookId = res;
-      console.log('book', this.bookId);
       this.spinnerService.hide();
     });
   }
 
   pageChange(e) {
+    this.showPagination = false;
     this.spinnerService.show();
+    e = 0;
     this.p = e;
     this.bookService.getBooks(this.p).subscribe(res => {
       this.totalItems = res['totalItems'];
       this.books = res['items'];
-      console.log(this.books, this.totalItems);
-
+      this.showPagination = true;
       this.spinnerService.hide();
     });
   }

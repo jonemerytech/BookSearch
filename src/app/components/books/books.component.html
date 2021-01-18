@@ -15,7 +15,7 @@
 </div>
 <div class="container d-flex justify-content-center">
   <pagination-controls
-    *ngIf="bookId.id == 0"
+    *ngIf="showPagination"
     class="my-pagination"
     (pageChange)="pageChange($event)"
   ></pagination-controls>

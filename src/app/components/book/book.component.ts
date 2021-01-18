@@ -1,7 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Book } from '../../models/Book';
-import { NgModel } from '@angular/forms';
-import { StarRatingModule } from 'angular-star-rating';
 
 @Component({
   selector: 'app-book',
